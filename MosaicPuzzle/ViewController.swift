@@ -9,8 +9,17 @@
 import UIKit
 
 
-class ViewController: UIViewController {
+class HomeVC: UIViewController {
 
+    
+    @IBAction func randomPickTTTTPressed(_ sender: UIButton) {
+        
+    }
+    
+    
+    
+    
+    
     override func viewDidLoad() {
     super.viewDidLoad()
     // Do any additional setup after loading the view.

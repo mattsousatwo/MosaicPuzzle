@@ -11,11 +11,11 @@
 		4080175AE69A877AB7C079FC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 408013057137B8370D0F7A49 /* Assets.xcassets */; };
 		40801888CF6BEBCF5E32320F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408017A3D70F71048000F0E6 /* AppDelegate.swift */; };
 		408019DDD3D8C26902009E54 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 408010C22D57C0324C2AA47A /* Main.storyboard */; };
-		40801BB13C9CFD5735672CBB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4080192063ED4F2D3CD4718F /* ViewController.swift */; };
 		40801D5F23A7C8FB21CE3A6D /* MosaicPuzzleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40801F73BA3B0A1B0C3F7A0B /* MosaicPuzzleUITests.swift */; };
 		40801E299172E896A7DDFA1B /* MosaicPuzzleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4080137D47A5DEAEE7900920 /* MosaicPuzzleTests.swift */; };
 		615691842293085B00B637C2 /* ImageEditingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615691832293085B00B637C2 /* ImageEditingVC.swift */; };
 		6156918722933A7D00B637C2 /* PuzzleVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6156918622933A7D00B637C2 /* PuzzleVC.swift */; };
+		61F87B2E22933D5E00327ACE /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F87B2D22933D5E00327ACE /* MainVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,7 +40,6 @@
 		4080137D47A5DEAEE7900920 /* MosaicPuzzleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MosaicPuzzleTests.swift; sourceTree = "<group>"; };
 		40801690332334F788074D63 /* MosaicPuzzle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MosaicPuzzle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		408017A3D70F71048000F0E6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		4080192063ED4F2D3CD4718F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		408019B9FD519EB3E4F746B3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.info; path = Info.plist; sourceTree = "<group>"; };
 		408019D4D7692813B1406AE5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.info; path = Info.plist; sourceTree = "<group>"; };
 		40801C0923CF1C21CE332E5E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -51,6 +50,7 @@
 		40801FB23C2182D06E4795CA /* MosaicPuzzleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MosaicPuzzleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		615691832293085B00B637C2 /* ImageEditingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageEditingVC.swift; sourceTree = "<group>"; };
 		6156918622933A7D00B637C2 /* PuzzleVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzleVC.swift; sourceTree = "<group>"; };
+		61F87B2D22933D5E00327ACE /* MainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,9 +132,9 @@
 		6156918522933A4500B637C2 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				4080192063ED4F2D3CD4718F /* ViewController.swift */,
 				615691832293085B00B637C2 /* ImageEditingVC.swift */,
 				6156918622933A7D00B637C2 /* PuzzleVC.swift */,
+				61F87B2D22933D5E00327ACE /* MainVC.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -270,8 +270,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				6156918722933A7D00B637C2 /* PuzzleVC.swift in Sources */,
+				61F87B2E22933D5E00327ACE /* MainVC.swift in Sources */,
 				40801888CF6BEBCF5E32320F /* AppDelegate.swift in Sources */,
-				40801BB13C9CFD5735672CBB /* ViewController.swift in Sources */,
 				615691842293085B00B637C2 /* ImageEditingVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
