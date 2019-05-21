@@ -109,14 +109,22 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BwG-lF-J4y">
                                 <rect key="frame" x="10" y="106" width="394" height="430"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9g8-Fz-3a1">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="n2D-Gq-N1K">
+                                        <rect key="frame" x="0.0" y="0.0" width="394" height="430"/>
+                                        <color key="backgroundColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </imageView>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="MP_cat" translatesAutoresizingMaskIntoConstraints="NO" id="9g8-Fz-3a1">
                                         <rect key="frame" x="0.0" y="0.0" width="394" height="430"/>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.23921568630000001" green="0.35294117650000001" blue="0.50196078430000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
+                                    <constraint firstItem="n2D-Gq-N1K" firstAttribute="height" secondItem="BwG-lF-J4y" secondAttribute="height" id="JUE-q9-8xb"/>
+                                    <constraint firstItem="n2D-Gq-N1K" firstAttribute="width" secondItem="BwG-lF-J4y" secondAttribute="width" id="MpZ-8I-qMj"/>
                                     <constraint firstItem="9g8-Fz-3a1" firstAttribute="centerY" secondItem="BwG-lF-J4y" secondAttribute="centerY" id="ggU-k9-8A5"/>
+                                    <constraint firstItem="n2D-Gq-N1K" firstAttribute="centerY" secondItem="BwG-lF-J4y" secondAttribute="centerY" id="jdj-nS-fHJ"/>
                                     <constraint firstItem="9g8-Fz-3a1" firstAttribute="width" secondItem="BwG-lF-J4y" secondAttribute="width" id="keF-m4-8w4"/>
+                                    <constraint firstItem="n2D-Gq-N1K" firstAttribute="centerX" secondItem="BwG-lF-J4y" secondAttribute="centerX" id="rHp-hA-jqg"/>
                                     <constraint firstItem="9g8-Fz-3a1" firstAttribute="centerX" secondItem="BwG-lF-J4y" secondAttribute="centerX" id="xs2-Pl-ukB"/>
                                     <constraint firstItem="9g8-Fz-3a1" firstAttribute="height" secondItem="BwG-lF-J4y" secondAttribute="height" id="zxS-aT-CSA"/>
                                 </constraints>
@@ -165,7 +173,9 @@
                         <viewLayoutGuide key="safeArea" id="CKb-OP-5zz"/>
                     </view>
                     <connections>
+                        <outlet property="gridLineIV" destination="n2D-Gq-N1K" id="Hx3-X6-Tdl"/>
                         <outlet property="imageView" destination="9g8-Fz-3a1" id="cfL-Ix-r2c"/>
+                        <outlet property="imageViewBG" destination="BwG-lF-J4y" id="gtF-YP-sR9"/>
                         <outlet property="sliderValueDisplay" destination="hoI-1L-Abn" id="tpB-dk-BuY"/>
                         <outlet property="sliderView" destination="ixE-66-hbx" id="7Jm-lr-InA"/>
                     </connections>
@@ -210,4 +220,7 @@
             <point key="canvasLocation" x="1503" y="112"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="MP_cat" width="320" height="480"/>
+    </resources>
 </document>

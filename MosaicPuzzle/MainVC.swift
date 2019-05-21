@@ -10,9 +10,20 @@ import UIKit
 
 class MainVC: UIViewController {
 
+    var images = Images()
+    var imageArray = [UIImage]()
+    
+    var gameImage = UIImage()
+    
     @IBAction func randomPickPressed(_ sender: Any) {
         print("randomPick()")
         performSegue(withIdentifier: "EditImageSegue", sender: self)
+        
+        let randomImage = images.pullRandomImage(from: imageArray, in: self)
+        
+        gameImage = images.unwrap(image: randomImage, in: self)!
+        
+        
     }
     
     @IBAction func selectPhotoPressed(_ sender: Any) {
@@ -31,14 +42,24 @@ class MainVC: UIViewController {
     }
     
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("viewDidLoad")
         
+         imageArray = images.collectLocalImages()
         
         // Do any additional setup after loading the view.
     }
-    
 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let nextVC = segue.destination as! ImageEditingVC
+        
+        nextVC.gameImage = images.pullRandomImage(from: imageArray, in: self)!
+        
+    }
+
+    
     /*
     // MARK: - Navigation
 
