@@ -63,4 +63,19 @@ class Images {
         view.present(alertController, animated: true)
     }
     
+    func move(image: UIView, sender: UIPanGestureRecognizer) {
+        var initalImageOffset = CGPoint()
+        
+        let translation = sender.translation(in: image)
+        
+        if sender.state == .began {
+            initalImageOffset = image.frame.origin
+        }
+        
+        let position = CGPoint(x: translation.x + initalImageOffset.x - image.frame.origin.x, y: translation.y + initalImageOffset.y - image.frame.origin.y)
+        image.transform = image.transform.translatedBy(x: position.x, y: position.y)
+        }
+    
+    
+    
 }

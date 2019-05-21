@@ -8,11 +8,18 @@
 
 import UIKit
 
-class ImageEditingVC: UIViewController {
+class ImageEditingVC: UIViewController, UIGestureRecognizerDelegate {
     
+    let images = Images()
+    let capture = ImageCapture()
+    let creation = TileCreation()
     
     var gameImage = UIImage()
-
+    var originalScale = CGFloat()
+    var originalRotation = CGFloat()
+    var rotation = CGFloat()
+    var screenshot = UIImage()
+    var tileArray = [UIImage]()
     
     @IBOutlet weak var imageViewBG: UIView!
     @IBOutlet weak var imageView: UIImageView!
@@ -20,6 +27,22 @@ class ImageEditingVC: UIViewController {
     
     @IBOutlet weak var sliderView: UISlider!
     @IBOutlet weak var sliderValueDisplay: UILabel!
+    @IBOutlet weak var refreshButton: UIImageView!
+    @IBOutlet weak var startButton: UIButton!
+    
+    
+    @IBAction func startButtonPressed(_ sender: Any) {
+        screenshot = capture.takeImage(of: imageViewBG)
+        
+        let roundedValue = round(sliderView.value)
+        let sliderInputValue = Int(roundedValue)
+        tileArray = creation.createTiles(sliderInputValue, from: screenshot)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            self.performSegue(withIdentifier: "EditingToPuzzleSegue", sender: self)
+        }
+        
+    }
+    
     
     
     func configureViewOrder() {
@@ -35,6 +58,10 @@ class ImageEditingVC: UIViewController {
         
         configureViewOrder()
         sliderValueDisplay.text = "0"
+        
+        
+        originalScale = imageView.contentScaleFactor
+        addGestures()
         // Do any additional setup after loading the view.
     }
     
@@ -65,13 +92,12 @@ class ImageEditingVC: UIViewController {
         let img1 = rendererOne.image(actions: { ctx in
             
             if gameImage.isDark == true {
-            ctx.cgContext.setStrokeColor(UIColor.red.cgColor)
+            ctx.cgContext.setStrokeColor(UIColor.white.cgColor)
             } else {
                 ctx.cgContext.setStrokeColor(UIColor.black.cgColor)
             }
             ctx.cgContext.setLineWidth(1)
-            
-            // Lines appear to be slightly angled at higher number of cells
+
             // Draw X lines (up, down)
             for number in start...Int(end) {
                 let xValue = imgViewBounds.width / CGFloat(end)
@@ -80,9 +106,6 @@ class ImageEditingVC: UIViewController {
             ctx.cgContext.move(to: CGPoint(x: xValue * CGFloat(number) , y: 0))
                 // end point
             ctx.cgContext.addLine(to: CGPoint(x: (imgViewBounds.width / CGFloat(end)) * CGFloat(number) , y: imgViewBounds.height))
-                // Original
-                // ctx.cgContext.move(to: CGPoint(x: (10 * number), y: 10))
-                // ctx.cgContext.addLine(to: CGPoint(x: CGFloat(10 * number), y: imgViewBounds.height))
             }
     
             // Draw Y lines (left, right)
@@ -95,7 +118,10 @@ class ImageEditingVC: UIViewController {
                 ctx.cgContext.addLine(to: CGPoint(x: imgViewBounds.width, y: (imgViewBounds.height / CGFloat(end)) * CGFloat(number)) )
             }
             
-            
+            // create grid outline
+            let rectangle = CGRect(x: 0, y: 0, width: imageViewBG.frame.width, height: imageViewBG.frame.height)
+            ctx.cgContext.setFillColor(red: 0, green: 0, blue: 0, alpha: 0)
+            ctx.cgContext.addRect(rectangle)
             
             ctx.cgContext.drawPath(using: .fillStroke)
             //ctx.cgContext.strokePath()
@@ -103,17 +129,104 @@ class ImageEditingVC: UIViewController {
         gridLineIV.image = img1
     }
 
-    /*
-    // MARK: - Navigation
+    
+    // :: Gestures ::
+    func addGestures() {
+        gridLineIV.isUserInteractionEnabled = false
+        imageView.isUserInteractionEnabled = true
+        refreshButton.isUserInteractionEnabled = true
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        
+        let panRecognizer = UIPanGestureRecognizer(target: self, action: #selector(panImage(_:)))
+        imageView.addGestureRecognizer(panRecognizer)
+        panRecognizer.delegate = self
+        
+        let rotateRecognizer = UIRotationGestureRecognizer(target: self, action: #selector(rotateImage(_:)))
+        imageView.addGestureRecognizer(rotateRecognizer)
+        rotateRecognizer.delegate = self
+        
+        let scaleRecognizer = UIPinchGestureRecognizer(target: self, action: #selector(scaleImage(_:)))
+       imageView.addGestureRecognizer(scaleRecognizer)
+       scaleRecognizer.delegate = self
+        
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(refresh(_:)))
+        refreshButton.addGestureRecognizer(tapRecognizer)
+        tapRecognizer.delegate = self
+
+        
     }
-    */
+    
+    var initalImageOffset = CGPoint()
+    
+    @objc func panImage(_ sender: UIPanGestureRecognizer ) {
+        print("moving image...")
+        
+        let translation = sender.translation(in: imageView)
+        
+        if sender.state == .began {
+            initalImageOffset = imageView.frame.origin
+        }
+        
+        let position = CGPoint(x: translation.x + initalImageOffset.x - imageView.frame.origin.x, y: translation.y + initalImageOffset.y - imageView.frame.origin.y)
+        imageView.transform = imageView.transform.translatedBy(x: position.x, y: position.y)
+        
+        
+        
+       // images.move(image: imageView, sender: sender)
+    }
+    
+  
+    @objc func rotateImage(_ sender: UIRotationGestureRecognizer) {
+        print("rotate image...")
+        
+        imageView.transform = imageView.transform.rotated(by: sender.rotation)
+        sender.rotation = 0
+    }
+    
+    @objc func scaleImage(_ sender: UIPinchGestureRecognizer) {
+        print("scale image...")
+        imageView.transform = imageView.transform.scaledBy(x: sender.scale, y: sender.scale)
+        sender.scale = 1
+    }
+    
+  
+    
+    
+    
+    @objc func refresh(_ sender: UITapGestureRecognizer) {
+        print("refresh")
+        // reset position, scale/size, rotation
+        imageView.transform = CGAffineTransform.identity
+        print("\(rotation)")
+    }
+    
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        
+        if gestureRecognizer.view != imageView {
+            return false
+        }
+        
+        if gestureRecognizer is UITapGestureRecognizer || otherGestureRecognizer is UITapGestureRecognizer || gestureRecognizer is UIPanGestureRecognizer || otherGestureRecognizer is UIPanGestureRecognizer {
+            return false
+        }
+        
+        return true
+    }
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let nextVC = segue.destination as! PuzzleVC
+        
+        // nextVC.gameImage = images.pullRandomImage(from: imageArray, in: self)!
+        nextVC.puzzleTiles = tileArray
+    }
+    
+    
+    
+ 
+} // <---  End Of Class
 
-}
 
 // Extention to create property to check if Image is mostly Black or mostly White
 extension CGImage {

@@ -135,36 +135,42 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oAW-zg-LkO">
-                                <rect key="frame" x="130" y="616" width="154" height="70"/>
+                                <rect key="frame" x="130" y="606.33333333333337" width="154" height="79.666666666666629"/>
                                 <color key="backgroundColor" red="0.23921568630000001" green="0.35294117650000001" blue="0.50196078430000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Button"/>
                                 <connections>
-                                    <segue destination="IkS-53-bg8" kind="show" id="9eb-Wx-QKh"/>
+                                    <action selector="startButtonPressed:" destination="Qsl-hX-WZ9" eventType="touchUpInside" id="4G5-yc-0eZ"/>
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="bRX-wN-5aA">
-                                <rect key="frame" x="10" y="556" width="394" height="30"/>
+                                <rect key="frame" x="10" y="556" width="394" height="20.333333333333371"/>
                                 <subviews>
                                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="2" minValue="1" maxValue="10" translatesAutoresizingMaskIntoConstraints="NO" id="ixE-66-hbx">
-                                        <rect key="frame" x="-2" y="0.0" width="336.33333333333331" height="31"/>
+                                        <rect key="frame" x="-2" y="0.0" width="336.33333333333331" height="21.333333333333332"/>
                                     </slider>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hoI-1L-Abn">
-                                        <rect key="frame" x="352.33333333333331" y="0.0" width="41.666666666666686" height="30"/>
+                                        <rect key="frame" x="352.33333333333331" y="0.0" width="41.666666666666686" height="20.333333333333332"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
                             </stackView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="MP_refresh" translatesAutoresizingMaskIntoConstraints="NO" id="tO3-vc-6kY">
+                                <rect key="frame" x="20" y="646.33333333333337" width="50" height="59.666666666666629"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.80741657157861269" green="0.82425134224377739" blue="0.93333333330000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="tO3-vc-6kY" firstAttribute="top" secondItem="bRX-wN-5aA" secondAttribute="bottom" constant="70" id="9ms-y7-7Kl"/>
                             <constraint firstItem="bRX-wN-5aA" firstAttribute="top" secondItem="BwG-lF-J4y" secondAttribute="bottom" constant="20" id="FaJ-iW-1Vq"/>
                             <constraint firstItem="BwG-lF-J4y" firstAttribute="top" secondItem="KOf-NW-UJk" secondAttribute="bottom" constant="20" id="H2e-7P-rSO"/>
                             <constraint firstItem="KOf-NW-UJk" firstAttribute="top" secondItem="CKb-OP-5zz" secondAttribute="top" constant="20" id="MiZ-bn-82M"/>
+                            <constraint firstItem="tO3-vc-6kY" firstAttribute="leading" secondItem="CKb-OP-5zz" secondAttribute="leading" constant="20" id="PLc-yg-Slf"/>
                             <constraint firstItem="CKb-OP-5zz" firstAttribute="bottom" secondItem="KOf-NW-UJk" secondAttribute="bottom" constant="650" id="Q7k-uY-MpV"/>
                             <constraint firstItem="BwG-lF-J4y" firstAttribute="leading" secondItem="CKb-OP-5zz" secondAttribute="leading" constant="10" id="RFb-k0-2me"/>
                             <constraint firstItem="oAW-zg-LkO" firstAttribute="top" secondItem="bRX-wN-5aA" secondAttribute="bottom" constant="30" id="ZvK-OC-OFy"/>
+                            <constraint firstItem="oAW-zg-LkO" firstAttribute="leading" secondItem="tO3-vc-6kY" secondAttribute="trailing" constant="60" id="cwo-ar-ScF"/>
                             <constraint firstItem="CKb-OP-5zz" firstAttribute="trailing" secondItem="bRX-wN-5aA" secondAttribute="trailing" constant="10" id="dcB-7q-JAU"/>
                             <constraint firstItem="CKb-OP-5zz" firstAttribute="trailing" secondItem="KOf-NW-UJk" secondAttribute="trailing" constant="140" id="e9r-dR-NEw"/>
                             <constraint firstItem="CKb-OP-5zz" firstAttribute="trailing" secondItem="BwG-lF-J4y" secondAttribute="trailing" constant="10" id="hVo-HT-wQY"/>
@@ -173,6 +179,7 @@
                             <constraint firstItem="oAW-zg-LkO" firstAttribute="leading" secondItem="CKb-OP-5zz" secondAttribute="leading" constant="130" id="kXY-Ri-0mi"/>
                             <constraint firstItem="KOf-NW-UJk" firstAttribute="leading" secondItem="CKb-OP-5zz" secondAttribute="leading" constant="140" id="lf8-oK-TBr"/>
                             <constraint firstItem="bRX-wN-5aA" firstAttribute="leading" secondItem="CKb-OP-5zz" secondAttribute="leading" constant="10" id="pTb-sW-plj"/>
+                            <constraint firstItem="CKb-OP-5zz" firstAttribute="bottom" secondItem="tO3-vc-6kY" secondAttribute="bottom" constant="30" id="raQ-OB-Q9i"/>
                             <constraint firstItem="CKb-OP-5zz" firstAttribute="trailing" secondItem="oAW-zg-LkO" secondAttribute="trailing" constant="130" id="yFK-o0-b9J"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="CKb-OP-5zz"/>
@@ -181,8 +188,11 @@
                         <outlet property="gridLineIV" destination="n2D-Gq-N1K" id="Hx3-X6-Tdl"/>
                         <outlet property="imageView" destination="9g8-Fz-3a1" id="cfL-Ix-r2c"/>
                         <outlet property="imageViewBG" destination="BwG-lF-J4y" id="gtF-YP-sR9"/>
+                        <outlet property="refreshButton" destination="tO3-vc-6kY" id="VbP-10-voZ"/>
                         <outlet property="sliderValueDisplay" destination="hoI-1L-Abn" id="tpB-dk-BuY"/>
                         <outlet property="sliderView" destination="ixE-66-hbx" id="7Jm-lr-InA"/>
+                        <outlet property="startButton" destination="oAW-zg-LkO" id="Vje-Cq-T0R"/>
+                        <segue destination="IkS-53-bg8" kind="show" identifier="EditingToPuzzleSegue" id="TZO-7g-M5l"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="81w-jz-cA9" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -203,7 +213,32 @@
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N7P-9n-Voh">
                                 <rect key="frame" x="20" y="120" width="374" height="130"/>
+                                <subviews>
+                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceHorizontal="YES" showsVerticalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z4O-vB-TE0">
+                                        <rect key="frame" x="10" y="5" width="354" height="120"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleAspectFit" distribution="equalCentering" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="VBf-ke-lbT">
+                                                <rect key="frame" x="0.0" y="0.0" width="354" height="120"/>
+                                            </stackView>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="VBf-ke-lbT" firstAttribute="centerY" secondItem="Z4O-vB-TE0" secondAttribute="centerY" id="3Ab-rf-0mJ"/>
+                                            <constraint firstItem="VBf-ke-lbT" firstAttribute="centerX" secondItem="Z4O-vB-TE0" secondAttribute="centerX" id="8K3-42-TLB"/>
+                                            <constraint firstItem="VBf-ke-lbT" firstAttribute="top" secondItem="Z4O-vB-TE0" secondAttribute="top" id="BYC-vl-dwg"/>
+                                            <constraint firstItem="VBf-ke-lbT" firstAttribute="width" secondItem="Z4O-vB-TE0" secondAttribute="width" id="K04-8q-RVe"/>
+                                            <constraint firstAttribute="bottom" secondItem="VBf-ke-lbT" secondAttribute="bottom" id="KBe-WS-G5v"/>
+                                            <constraint firstAttribute="trailing" secondItem="VBf-ke-lbT" secondAttribute="trailing" id="gMX-Zw-w5b"/>
+                                            <constraint firstItem="VBf-ke-lbT" firstAttribute="leading" secondItem="Z4O-vB-TE0" secondAttribute="leading" id="uF0-7n-EGs"/>
+                                        </constraints>
+                                    </scrollView>
+                                </subviews>
                                 <color key="backgroundColor" red="0.23831963539123535" green="0.35396313667297363" blue="0.50347220897674561" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="Z4O-vB-TE0" secondAttribute="bottom" constant="5" id="AS9-tV-2RW"/>
+                                    <constraint firstAttribute="trailing" secondItem="Z4O-vB-TE0" secondAttribute="trailing" constant="10" id="gMJ-nQ-yXS"/>
+                                    <constraint firstItem="Z4O-vB-TE0" firstAttribute="top" secondItem="N7P-9n-Voh" secondAttribute="top" constant="5" id="rEh-ch-NHQ"/>
+                                    <constraint firstItem="Z4O-vB-TE0" firstAttribute="leading" secondItem="N7P-9n-Voh" secondAttribute="leading" constant="10" id="sXV-nz-8J4"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="0.80741657157861269" green="0.82425134224377739" blue="0.93333333330000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -219,13 +254,17 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="46k-GM-hB3"/>
                     </view>
+                    <connections>
+                        <outlet property="tileStack" destination="VBf-ke-lbT" id="YeF-9U-TtB"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gbA-Le-FSE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1503" y="112"/>
+            <point key="canvasLocation" x="1502.8985507246377" y="111.68478260869566"/>
         </scene>
     </scenes>
     <resources>
         <image name="MP_cat" width="320" height="480"/>
+        <image name="MP_refresh" width="60" height="60"/>
     </resources>
 </document>
