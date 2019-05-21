@@ -85,6 +85,11 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="cameraButton" destination="hjP-Ys-oZZ" id="X3t-bq-uMg"/>
+                        <outlet property="gameHeading" destination="LwX-63-TVP" id="BKU-eV-Imy"/>
+                        <outlet property="randomButton" destination="cwF-KQ-GLk" id="op2-nu-kXx"/>
+                        <outlet property="resultsButton" destination="2TF-1H-eU0" id="dXH-mC-o94"/>
+                        <outlet property="selectPhotoButton" destination="iYp-nx-6Hf" id="Ujl-rP-lNi"/>
                         <segue destination="Qsl-hX-WZ9" kind="show" identifier="EditImageSegue" id="InG-px-jaa"/>
                     </connections>
                 </viewController>

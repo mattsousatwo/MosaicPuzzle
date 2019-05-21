@@ -22,9 +22,6 @@ class ImageEditingVC: UIViewController {
     @IBOutlet weak var sliderValueDisplay: UILabel!
     
     
-    // create variables of image height - width
-    // test getting multiple lines across the screen 
-    
     func configureViewOrder() {
         imageView.image = gameImage
         imageViewBG.sendSubviewToBack(imageView)
@@ -41,7 +38,7 @@ class ImageEditingVC: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-    var numberOfLines: Float = 3
+    var numberOfLines: Float = 1
     
     
     @objc func sliderValueChanged(_ sender: UISlider) {
@@ -67,7 +64,11 @@ class ImageEditingVC: UIViewController {
         let rendererOne = UIGraphicsImageRenderer(bounds: imageView.bounds)
         let img1 = rendererOne.image(actions: { ctx in
             
-            ctx.cgContext.setStrokeColor(UIColor.white.cgColor)
+            if gameImage.isDark == true {
+            ctx.cgContext.setStrokeColor(UIColor.red.cgColor)
+            } else {
+                ctx.cgContext.setStrokeColor(UIColor.black.cgColor)
+            }
             ctx.cgContext.setLineWidth(1)
             
             // Lines appear to be slightly angled at higher number of cells
@@ -112,4 +113,38 @@ class ImageEditingVC: UIViewController {
     }
     */
 
+}
+
+// Extention to create property to check if Image is mostly Black or mostly White
+extension CGImage {
+    var isDark: Bool {
+        get {
+            guard let imageData = self.dataProvider?.data else { return false }
+            guard let ptr = CFDataGetBytePtr(imageData) else { return false }
+            let length = CFDataGetLength(imageData)
+            let threshold = Int(Double(self.width * self.height) * 0.45)
+            var darkPixels = 0
+            for i in stride(from: 0, to: length, by: 4) {
+                let r = ptr[i]
+                let g = ptr[i + 1]
+                let b = ptr[i + 2]
+                let luminance = (0.299 * Double(r) + 0.587 * Double(g) + 0.114 * Double(b))
+                if luminance < 150 {
+                    darkPixels += 1
+                    if darkPixels > threshold {
+                        return true
+                    }
+                }
+            }
+            return false
+        }
+    }
+}
+
+extension UIImage {
+    var isDark: Bool {
+        get {
+            return self.cgImage?.isDark ?? false
+        }
+    }
 }
