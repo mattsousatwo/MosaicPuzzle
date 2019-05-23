@@ -9,7 +9,8 @@
 import UIKit
 
 class PuzzleVC: UIViewController {
-
+    
+    let t = TileCreation()
     var puzzleTiles = [UIImage]()
     
     @IBOutlet weak var tileStack: UIStackView!
@@ -17,16 +18,14 @@ class PuzzleVC: UIViewController {
   
     
     func addTilesToStack() {
-        for image in puzzleTiles {
-            let closureView: UIImageView = { () -> UIImageView in
-                let view = UIImageView()
-                view.image = image
-                return view
-            }()
+        
+        let array = try? t.convert(imageArray: puzzleTiles, toSize: 54) 
+        
+        for tile in array! {
             
-            tileStack.addArrangedSubview(closureView)
+            tileStack.addArrangedSubview(tile)
         }
-        print(puzzleTiles.count)
+        print("the number of tiles in array are : \(array?.count ?? 999)")
     }
     
     
@@ -38,14 +37,6 @@ class PuzzleVC: UIViewController {
     }
     
 
-    
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        
-        
-       
-        
-    }
     
     /*
     // MARK: - Navigation

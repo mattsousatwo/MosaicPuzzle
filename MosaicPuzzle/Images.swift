@@ -26,33 +26,27 @@ class Images {
     }
     
     // randomize images
-    func pullRandomImage(from imageArray: [UIImage], in controller: UIViewController) -> UIImage? {
-        
-        if imageArray.count > 0 {
-            while true {
-                let randomIndex = Int.random(in: 0..<imageArray.count)
-                let randomizedImage = imageArray[randomIndex]
-                print("randomImage() = Pass!")
-                return randomizedImage
-            }
+    func pullRandomImage(from imageArray: [UIImage], in controller: UIViewController) throws -> UIImage? {
+        guard imageArray.count > 0  else {
+        errorAlert(message: "Couldn't pull random images", in: controller)
+        throw ErrorMessages.misc(error: "imageArray Missing Images")
         }
         
-        print("randomImage() Failed")
-        
-        errorAlert(message: "Couldn't pull random images", in: controller)
-        return nil
+        let randomIndex = Int.random(in: 0..<imageArray.count)
+        let randomizedImage = imageArray[randomIndex]
+        print("randomImage() = Pass!")
+        return randomizedImage
     }
     
     
-    func unwrap(image: UIImage?, in controller: UIViewController) -> UIImage? {
-        
-        if let newImage = image {
-            print("unwrapImage() = Pass!")
-            return newImage
+    func unwrap(image: UIImage?, in controller: UIViewController) throws -> UIImage? {
+        guard let newImage = image else {
+            
+            errorAlert(message: "Couldn't unwrap images", in: controller)
+            throw ErrorMessages.noImage
         }
-        print("randomImage() = Failed--")
-        errorAlert(message: "Couldn't unwrap images", in: controller)
-        return nil
+        print("unwrapImage() = Pass!")
+        return newImage
     }
     
     

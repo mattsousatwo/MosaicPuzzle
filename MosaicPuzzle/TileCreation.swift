@@ -72,7 +72,6 @@ struct TileCreation {
         if slicedImageArray.count != 0 {
             print("[*] removing slices from slicedImageArray \n")
             slicedImageArray.removeAll()
-            
         } else {
             
             print("-- slicedImageArray.count = 0 \n")
@@ -80,6 +79,21 @@ struct TileCreation {
         }
     }
     
+    
+    // Convert ImageArray into Tiles
+    func convert(imageArray array: [UIImage], toSize size: Int) throws -> [Tile]? {
+        guard array.count != 0 else { throw ErrorMessages.missingTiles }
+        
+        var container = [Tile]()
+        
+        container = array.map({ (image) in
+            let newTile = Tile(frame: CGRect(x: 0, y: 0, width: size, height: size))
+            newTile.image = image
+            return newTile
+        })
+        
+        return container
+    }
     
     
     

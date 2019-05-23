@@ -30,9 +30,9 @@ class MainVC: UIViewController {
         print("randomPick()")
        
         
-        let randomImage = images.pullRandomImage(from: imageArray, in: self)
+        let randomImage = try? images.pullRandomImage(from: imageArray, in: self)
         
-        gameImage = images.unwrap(image: randomImage, in: self)!
+        gameImage = try! images.unwrap(image: randomImage, in: self)!
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
             self.performSegue(withIdentifier: "EditImageSegue", sender: self)
         }
@@ -61,7 +61,7 @@ class MainVC: UIViewController {
         super.viewDidLoad()
         print("viewDidLoad")
         
-         imageArray = images.collectLocalImages()
+        imageArray = images.collectLocalImages()
         
         animateOnScreen()
         // Do any additional setup after loading the view.
@@ -73,17 +73,17 @@ class MainVC: UIViewController {
         // drop into position
         UIView.animate(withDuration: 0.6, delay: 0, options: .curveEaseInOut, animations: {
             // self.gameHeading.frame.origin = CGPoint(x: -viewBounds.width, y: 0)
-             self.gameHeading.frame.origin = CGPoint(x: 0, y: viewBounds.height)
+            self.gameHeading.frame.origin = CGPoint(x: 0, y: viewBounds.height)
         }, completion: { (sucess) in
             // begin spring
             UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.4, initialSpringVelocity: 5, options: .curveEaseInOut, animations: {
                 self.gameHeading.frame = CGRect(x: self.gameHeading.frame.origin.x, y: self.gameHeading.frame.origin.y, width: self.gameHeading.bounds.width + 5, height: self.gameHeading.bounds.height + 5)
             }, completion: { (sucess) in
                 // ending spring animation
-               self.gameHeading.frame = CGRect(x: self.gameHeading.frame.origin.x, y: self.gameHeading.frame.origin.y, width: self.gameHeading.bounds.width - 5, height: self.gameHeading.bounds.height - 5)
+                self.gameHeading.frame = CGRect(x: self.gameHeading.frame.origin.x, y: self.gameHeading.frame.origin.y, width: self.gameHeading.bounds.width - 5, height: self.gameHeading.bounds.height - 5)
             })
         })
-      
+        
     }
     
     
@@ -158,7 +158,8 @@ class MainVC: UIViewController {
        // nextVC.gameImage = images.pullRandomImage(from: imageArray, in: self)!
         nextVC.gameImage = gameImage
     }
-
+    
+    
     
     /*
     // MARK: - Navigation

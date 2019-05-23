@@ -15,9 +15,6 @@ class ImageEditingVC: UIViewController, UIGestureRecognizerDelegate {
     let creation = TileCreation()
     
     var gameImage = UIImage()
-    var originalScale = CGFloat()
-    var originalRotation = CGFloat()
-    var rotation = CGFloat()
     var screenshot = UIImage()
     var tileArray = [UIImage]()
     
@@ -57,10 +54,11 @@ class ImageEditingVC: UIViewController, UIGestureRecognizerDelegate {
         
         
         configureViewOrder()
-        sliderValueDisplay.text = "0"
         
         
-        originalScale = imageView.contentScaleFactor
+        
+        sliderValueDisplay.text = "\(round(sliderView.value))"
+        drawLines()
         addGestures()
         // Do any additional setup after loading the view.
     }
@@ -170,9 +168,7 @@ class ImageEditingVC: UIViewController, UIGestureRecognizerDelegate {
         let position = CGPoint(x: translation.x + initalImageOffset.x - imageView.frame.origin.x, y: translation.y + initalImageOffset.y - imageView.frame.origin.y)
         imageView.transform = imageView.transform.translatedBy(x: position.x, y: position.y)
         
-        
-        
-       // images.move(image: imageView, sender: sender)
+
     }
     
   
@@ -197,10 +193,9 @@ class ImageEditingVC: UIViewController, UIGestureRecognizerDelegate {
         print("refresh")
         // reset position, scale/size, rotation
         imageView.transform = CGAffineTransform.identity
-        print("\(rotation)")
     }
     
-    
+    // recognize multiple gestures
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         
         if gestureRecognizer.view != imageView {
