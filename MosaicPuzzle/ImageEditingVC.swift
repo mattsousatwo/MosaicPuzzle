@@ -26,6 +26,7 @@ class ImageEditingVC: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet weak var sliderValueDisplay: UILabel!
     @IBOutlet weak var refreshButton: UIImageView!
     @IBOutlet weak var startButton: UIButton!
+    @IBOutlet weak var backButton: UIImageView!
     
     
     @IBAction func startButtonPressed(_ sender: Any) {
@@ -133,7 +134,7 @@ class ImageEditingVC: UIViewController, UIGestureRecognizerDelegate {
         gridLineIV.isUserInteractionEnabled = false
         imageView.isUserInteractionEnabled = true
         refreshButton.isUserInteractionEnabled = true
-
+        backButton.isUserInteractionEnabled = true
         
         let panRecognizer = UIPanGestureRecognizer(target: self, action: #selector(panImage(_:)))
         imageView.addGestureRecognizer(panRecognizer)
@@ -151,6 +152,9 @@ class ImageEditingVC: UIViewController, UIGestureRecognizerDelegate {
         refreshButton.addGestureRecognizer(tapRecognizer)
         tapRecognizer.delegate = self
 
+        let backTap = UITapGestureRecognizer(target: self, action: #selector(goBackPressed(_:)))
+        backButton.addGestureRecognizer(backTap)
+        backTap.delegate = self 
         
     }
     
@@ -186,7 +190,12 @@ class ImageEditingVC: UIViewController, UIGestureRecognizerDelegate {
     }
     
   
-    
+    @objc func goBackPressed(_ sender: UITapGestureRecognizer) {
+        print("go back")
+        
+        performSegue(withIdentifier: "goToMainVC", sender: self)
+        
+    }
     
     
     @objc func refresh(_ sender: UITapGestureRecognizer) {
@@ -211,10 +220,18 @@ class ImageEditingVC: UIViewController, UIGestureRecognizerDelegate {
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let nextVC = segue.destination as! PuzzleVC
-        
-        // nextVC.gameImage = images.pullRandomImage(from: imageArray, in: self)!
-        nextVC.puzzleTiles = tileArray
+        switch segue.identifier {
+        case "EditingToPuzzleSegue":
+            let puzzleVC = segue.destination as! PuzzleVC
+            puzzleVC.puzzleTiles = tileArray
+        case "goToMainVC":
+            
+            print("Working!")
+        default:
+           
+            break
+        }
+     
     }
     
     

@@ -159,6 +159,9 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="MP_refresh" translatesAutoresizingMaskIntoConstraints="NO" id="tO3-vc-6kY">
                                 <rect key="frame" x="20" y="646.33333333333337" width="50" height="59.666666666666629"/>
                             </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="MP_shark" translatesAutoresizingMaskIntoConstraints="NO" id="etQ-wQ-zRl">
+                                <rect key="frame" x="344" y="646.33333333333337" width="50" height="59.666666666666629"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.80741657157861269" green="0.82425134224377739" blue="0.93333333330000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -169,22 +172,27 @@
                             <constraint firstItem="tO3-vc-6kY" firstAttribute="leading" secondItem="CKb-OP-5zz" secondAttribute="leading" constant="20" id="PLc-yg-Slf"/>
                             <constraint firstItem="CKb-OP-5zz" firstAttribute="bottom" secondItem="KOf-NW-UJk" secondAttribute="bottom" constant="650" id="Q7k-uY-MpV"/>
                             <constraint firstItem="BwG-lF-J4y" firstAttribute="leading" secondItem="CKb-OP-5zz" secondAttribute="leading" constant="10" id="RFb-k0-2me"/>
+                            <constraint firstItem="CKb-OP-5zz" firstAttribute="trailing" secondItem="etQ-wQ-zRl" secondAttribute="trailing" constant="20" id="Rco-GX-mnp"/>
                             <constraint firstItem="oAW-zg-LkO" firstAttribute="top" secondItem="bRX-wN-5aA" secondAttribute="bottom" constant="30" id="ZvK-OC-OFy"/>
                             <constraint firstItem="oAW-zg-LkO" firstAttribute="leading" secondItem="tO3-vc-6kY" secondAttribute="trailing" constant="60" id="cwo-ar-ScF"/>
                             <constraint firstItem="CKb-OP-5zz" firstAttribute="trailing" secondItem="bRX-wN-5aA" secondAttribute="trailing" constant="10" id="dcB-7q-JAU"/>
                             <constraint firstItem="CKb-OP-5zz" firstAttribute="trailing" secondItem="KOf-NW-UJk" secondAttribute="trailing" constant="140" id="e9r-dR-NEw"/>
+                            <constraint firstItem="etQ-wQ-zRl" firstAttribute="leading" secondItem="oAW-zg-LkO" secondAttribute="trailing" constant="60" id="fSt-dY-AGb"/>
                             <constraint firstItem="CKb-OP-5zz" firstAttribute="trailing" secondItem="BwG-lF-J4y" secondAttribute="trailing" constant="10" id="hVo-HT-wQY"/>
                             <constraint firstItem="CKb-OP-5zz" firstAttribute="bottom" secondItem="oAW-zg-LkO" secondAttribute="bottom" constant="50" id="hpN-2m-bE6"/>
                             <constraint firstItem="CKb-OP-5zz" firstAttribute="bottom" secondItem="BwG-lF-J4y" secondAttribute="bottom" constant="200" id="jJb-b2-jt8"/>
                             <constraint firstItem="oAW-zg-LkO" firstAttribute="leading" secondItem="CKb-OP-5zz" secondAttribute="leading" constant="130" id="kXY-Ri-0mi"/>
                             <constraint firstItem="KOf-NW-UJk" firstAttribute="leading" secondItem="CKb-OP-5zz" secondAttribute="leading" constant="140" id="lf8-oK-TBr"/>
+                            <constraint firstItem="etQ-wQ-zRl" firstAttribute="top" secondItem="bRX-wN-5aA" secondAttribute="bottom" constant="70" id="oQS-pn-TB0"/>
                             <constraint firstItem="bRX-wN-5aA" firstAttribute="leading" secondItem="CKb-OP-5zz" secondAttribute="leading" constant="10" id="pTb-sW-plj"/>
+                            <constraint firstItem="CKb-OP-5zz" firstAttribute="bottom" secondItem="etQ-wQ-zRl" secondAttribute="bottom" constant="30" id="qoV-a7-HQO"/>
                             <constraint firstItem="CKb-OP-5zz" firstAttribute="bottom" secondItem="tO3-vc-6kY" secondAttribute="bottom" constant="30" id="raQ-OB-Q9i"/>
                             <constraint firstItem="CKb-OP-5zz" firstAttribute="trailing" secondItem="oAW-zg-LkO" secondAttribute="trailing" constant="130" id="yFK-o0-b9J"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="CKb-OP-5zz"/>
                     </view>
                     <connections>
+                        <outlet property="backButton" destination="etQ-wQ-zRl" id="49N-g7-e7z"/>
                         <outlet property="gridLineIV" destination="n2D-Gq-N1K" id="Hx3-X6-Tdl"/>
                         <outlet property="imageView" destination="9g8-Fz-3a1" id="cfL-Ix-r2c"/>
                         <outlet property="imageViewBG" destination="BwG-lF-J4y" id="gtF-YP-sR9"/>
@@ -193,11 +201,13 @@
                         <outlet property="sliderView" destination="ixE-66-hbx" id="7Jm-lr-InA"/>
                         <outlet property="startButton" destination="oAW-zg-LkO" id="Vje-Cq-T0R"/>
                         <segue destination="IkS-53-bg8" kind="show" identifier="EditingToPuzzleSegue" id="TZO-7g-M5l"/>
+                        <segue destination="ZxG-DX-dro" kind="unwind" identifier="goToMainVC" unwindAction="unwindToMainVCWithSegue:" id="83g-cH-CAz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="81w-jz-cA9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="ZxG-DX-dro" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="671" y="109"/>
+            <point key="canvasLocation" x="669.56521739130437" y="108.42391304347827"/>
         </scene>
         <!--PuzzleVC-->
         <scene sceneID="Pdi-GH-oUp">
@@ -266,5 +276,6 @@
     <resources>
         <image name="MP_cat" width="320" height="480"/>
         <image name="MP_refresh" width="60" height="60"/>
+        <image name="MP_shark" width="320" height="480"/>
     </resources>
 </document>

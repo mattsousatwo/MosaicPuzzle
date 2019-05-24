@@ -28,7 +28,7 @@ class Images {
     // randomize images
     func pullRandomImage(from imageArray: [UIImage], in controller: UIViewController) throws -> UIImage? {
         guard imageArray.count > 0  else {
-        errorAlert(message: "Couldn't pull random images", in: controller)
+        errorAlert(message: "Couldn't pull random image from storage", in: controller)
         throw ErrorMessages.misc(error: "imageArray Missing Images")
         }
         

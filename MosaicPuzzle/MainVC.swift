@@ -14,7 +14,8 @@ class MainVC: UIViewController {
     var imageArray = [UIImage]()
     
     var gameImage = UIImage()
-
+    var buttonHeight = CGFloat()
+    var buttonWidth = CGFloat()
     
     @IBOutlet weak var gameHeading: UILabel!
     @IBOutlet weak var randomButton: UIButton!
@@ -64,6 +65,8 @@ class MainVC: UIViewController {
         imageArray = images.collectLocalImages()
         
         animateOnScreen()
+        buttonHeight = randomButton.frame.height
+        buttonWidth = randomButton.frame.width
         // Do any additional setup after loading the view.
     }
 
@@ -117,7 +120,10 @@ class MainVC: UIViewController {
         UIView.animate(withDuration: 0.5, delay: 0.3, options: .curveEaseIn, animations: {
             self.resultsButton.center.x += self.view.bounds.width
             self.resultsButton.frame.size = CGSize(width: 5, height: 5)
+        }, completion: { (sucess) in
+            self.animateViewsBack()
         })
+        
     }
     
     
@@ -148,6 +154,40 @@ class MainVC: UIViewController {
         })
     }
 
+    func animateViewsBack() {
+        let delay = 0.8
+        let duration = 0.1
+        
+        // push header off screen
+        UIView.animate(withDuration: duration, delay: delay, options: .curveEaseIn, animations: {
+            self.gameHeading.center.y += self.view.bounds.height
+            
+        }, completion: { (sucess) in
+            self.gameHeading.alpha = 1
+        })
+        
+        // send random button to the right
+        UIView.animate(withDuration: duration, delay: delay, options: .curveEaseIn, animations: {
+            self.randomButton.center.x -= self.view.bounds.width
+            self.randomButton.frame.size = CGSize(width: self.buttonWidth, height: self.buttonHeight)
+            //  self.view.layoutIfNeeded()
+        })
+        // send select photo button to the right
+        UIView.animate(withDuration: duration, delay: delay, options: .curveEaseIn, animations: {
+            self.selectPhotoButton.center.x -= self.view.bounds.width
+            self.selectPhotoButton.frame.size = CGSize(width: self.buttonWidth, height: self.buttonHeight)
+        })
+        // send camera button to the right
+        UIView.animate(withDuration: duration, delay: delay, options: .curveEaseIn, animations: {
+            self.cameraButton.center.x -= self.view.bounds.width
+            self.cameraButton.frame.size = CGSize(width: self.buttonWidth, height: self.buttonHeight)
+        })
+        // send results button to the right
+        UIView.animate(withDuration: duration, delay: delay, options: .curveEaseIn, animations: {
+            self.resultsButton.center.x -= self.view.bounds.width
+            self.resultsButton.frame.size = CGSize(width: self.buttonWidth, height: self.buttonHeight)
+        })
+    }
     
     
     
@@ -159,7 +199,7 @@ class MainVC: UIViewController {
         nextVC.gameImage = gameImage
     }
     
-    
+    @IBAction func unwindToMainVC(segue: UIStoryboardSegue) { }
     
     /*
     // MARK: - Navigation
