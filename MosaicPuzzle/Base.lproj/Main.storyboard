@@ -105,31 +105,31 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BwG-lF-J4y">
+                            <view contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="BwG-lF-J4y">
                                 <rect key="frame" x="10" y="106" width="394" height="430"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="n2D-Gq-N1K">
-                                        <rect key="frame" x="0.0" y="0.0" width="394" height="430"/>
-                                        <color key="backgroundColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </imageView>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="MP_cat" translatesAutoresizingMaskIntoConstraints="NO" id="9g8-Fz-3a1">
                                         <rect key="frame" x="0.0" y="0.0" width="394" height="430"/>
+                                    </imageView>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="249" verticalHuggingPriority="249" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="n2D-Gq-N1K">
+                                        <rect key="frame" x="0.0" y="0.0" width="394" height="430"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.23921568630000001" green="0.35294117650000001" blue="0.50196078430000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstItem="n2D-Gq-N1K" firstAttribute="height" secondItem="BwG-lF-J4y" secondAttribute="height" id="JUE-q9-8xb"/>
-                                    <constraint firstItem="n2D-Gq-N1K" firstAttribute="width" secondItem="BwG-lF-J4y" secondAttribute="width" id="MpZ-8I-qMj"/>
+                                    <constraint firstItem="n2D-Gq-N1K" firstAttribute="height" secondItem="BwG-lF-J4y" secondAttribute="height" id="Fw2-Gv-uin"/>
+                                    <constraint firstItem="n2D-Gq-N1K" firstAttribute="centerY" secondItem="BwG-lF-J4y" secondAttribute="centerY" id="RO1-qh-AZq"/>
+                                    <constraint firstItem="n2D-Gq-N1K" firstAttribute="width" secondItem="BwG-lF-J4y" secondAttribute="width" id="Xeo-mf-17f"/>
+                                    <constraint firstItem="n2D-Gq-N1K" firstAttribute="centerX" secondItem="BwG-lF-J4y" secondAttribute="centerX" id="b3P-gC-ipZ"/>
                                     <constraint firstItem="9g8-Fz-3a1" firstAttribute="centerY" secondItem="BwG-lF-J4y" secondAttribute="centerY" id="ggU-k9-8A5"/>
-                                    <constraint firstItem="n2D-Gq-N1K" firstAttribute="centerY" secondItem="BwG-lF-J4y" secondAttribute="centerY" id="jdj-nS-fHJ"/>
                                     <constraint firstItem="9g8-Fz-3a1" firstAttribute="width" secondItem="BwG-lF-J4y" secondAttribute="width" id="keF-m4-8w4"/>
-                                    <constraint firstItem="n2D-Gq-N1K" firstAttribute="centerX" secondItem="BwG-lF-J4y" secondAttribute="centerX" id="rHp-hA-jqg"/>
                                     <constraint firstItem="9g8-Fz-3a1" firstAttribute="centerX" secondItem="BwG-lF-J4y" secondAttribute="centerX" id="xs2-Pl-ukB"/>
                                     <constraint firstItem="9g8-Fz-3a1" firstAttribute="height" secondItem="BwG-lF-J4y" secondAttribute="height" id="zxS-aT-CSA"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oAW-zg-LkO">
-                                <rect key="frame" x="130" y="606.33333333333337" width="154" height="79.666666666666629"/>
+                                <rect key="frame" x="130" y="616" width="154" height="70"/>
                                 <color key="backgroundColor" red="0.23921568630000001" green="0.35294117650000001" blue="0.50196078430000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Button"/>
                                 <connections>
@@ -143,13 +143,13 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="bRX-wN-5aA">
-                                <rect key="frame" x="10" y="556" width="394" height="20.333333333333371"/>
+                                <rect key="frame" x="10" y="556" width="394" height="30"/>
                                 <subviews>
-                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="1" maxValue="10" translatesAutoresizingMaskIntoConstraints="NO" id="ixE-66-hbx">
-                                        <rect key="frame" x="-2" y="0.0" width="336.33333333333331" height="21.333333333333332"/>
+                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="2" minValue="1" maxValue="10" translatesAutoresizingMaskIntoConstraints="NO" id="ixE-66-hbx">
+                                        <rect key="frame" x="-2" y="0.0" width="336.33333333333331" height="31"/>
                                     </slider>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hoI-1L-Abn">
-                                        <rect key="frame" x="352.33333333333331" y="0.0" width="41.666666666666686" height="20.333333333333332"/>
+                                        <rect key="frame" x="352.33333333333331" y="0.0" width="41.666666666666686" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -157,10 +157,10 @@
                                 </subviews>
                             </stackView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="MP_refresh" translatesAutoresizingMaskIntoConstraints="NO" id="tO3-vc-6kY">
-                                <rect key="frame" x="20" y="646.33333333333337" width="50" height="59.666666666666629"/>
+                                <rect key="frame" x="20" y="656" width="50" height="50"/>
                             </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="MP_shark" translatesAutoresizingMaskIntoConstraints="NO" id="etQ-wQ-zRl">
-                                <rect key="frame" x="344" y="646.33333333333337" width="50" height="59.666666666666629"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="MP_back" translatesAutoresizingMaskIntoConstraints="NO" id="etQ-wQ-zRl">
+                                <rect key="frame" x="344" y="656" width="50" height="50"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.80741657157861269" green="0.82425134224377739" blue="0.93333333330000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -274,8 +274,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="MP_back" width="30" height="30"/>
         <image name="MP_cat" width="320" height="480"/>
         <image name="MP_refresh" width="60" height="60"/>
-        <image name="MP_shark" width="320" height="480"/>
     </resources>
 </document>

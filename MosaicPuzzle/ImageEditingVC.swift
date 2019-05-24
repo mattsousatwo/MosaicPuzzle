@@ -13,6 +13,7 @@ class ImageEditingVC: UIViewController, UIGestureRecognizerDelegate {
     let images = Images()
     let capture = ImageCapture()
     let creation = TileCreation()
+    let graph = Graph()
     
     var gameImage = UIImage()
     var screenshot = UIImage()
@@ -41,6 +42,12 @@ class ImageEditingVC: UIViewController, UIGestureRecognizerDelegate {
         
     }
     
+    // Set Slider Value Label to the square of the value of the slider
+    func squareSliderValue( ) {
+        let numberOfCells = round(sliderView.value) * round(sliderView.value)
+        sliderValueDisplay.text = String(format: "%g", numberOfCells)
+    }
+    
     
     
     func configureViewOrder() {
@@ -58,13 +65,19 @@ class ImageEditingVC: UIViewController, UIGestureRecognizerDelegate {
         
         
         
-        sliderValueDisplay.text = "\(round(sliderView.value))"
-        drawLines()
-        addGestures()
+        squareSliderValue()
+        
+        addGestures() 
         // Do any additional setup after loading the view.
     }
     
-    var numberOfLines: Float = 1
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        drawLines()
+    }
+    
+    var numberOfLines: Float = 2
     
     
     @objc func sliderValueChanged(_ sender: UISlider) {
@@ -72,8 +85,7 @@ class ImageEditingVC: UIViewController, UIGestureRecognizerDelegate {
         
         numberOfLines = sliderView.value
         
-        let numberOfCells = round(sliderView.value) * round(sliderView.value)
-        sliderValueDisplay.text = String(format: "%g", numberOfCells)
+        squareSliderValue()
         
         drawLines()
     }
@@ -84,10 +96,10 @@ class ImageEditingVC: UIViewController, UIGestureRecognizerDelegate {
         let start: Int = 1
         let end = round(numberOfLines)
         
-        let imgViewBounds = imageView.bounds
+        let imgViewBounds = gridLineIV.bounds
     
         
-        let rendererOne = UIGraphicsImageRenderer(bounds: imageView.bounds)
+        let rendererOne = UIGraphicsImageRenderer(bounds: gridLineIV.bounds)
         let img1 = rendererOne.image(actions: { ctx in
             
             if gameImage.isDark == true {
@@ -101,7 +113,7 @@ class ImageEditingVC: UIViewController, UIGestureRecognizerDelegate {
             for number in start...Int(end) {
                 let xValue = imgViewBounds.width / CGFloat(end)
             
-                // beginging xValue * CGFloat(number)
+                // begining xValue * CGFloat(number)
             ctx.cgContext.move(to: CGPoint(x: xValue * CGFloat(number) , y: 0))
                 // end point
             ctx.cgContext.addLine(to: CGPoint(x: (imgViewBounds.width / CGFloat(end)) * CGFloat(number) , y: imgViewBounds.height))
@@ -111,14 +123,14 @@ class ImageEditingVC: UIViewController, UIGestureRecognizerDelegate {
             for number in start...Int(end) {
                 let yValue = imgViewBounds.height / CGFloat(end)
                 
-                // beginging
+                // begining
                 ctx.cgContext.move(to: CGPoint(x: 0, y: yValue * CGFloat(number))  )
                 // end point    - (imgViewBounds.height / CGFloat(end)) * CGFloat(number))
                 ctx.cgContext.addLine(to: CGPoint(x: imgViewBounds.width, y: (imgViewBounds.height / CGFloat(end)) * CGFloat(number)) )
             }
             
             // create grid outline
-            let rectangle = CGRect(x: 0, y: 0, width: imageViewBG.frame.width, height: imageViewBG.frame.height)
+            let rectangle = CGRect(x: 0, y: 0, width: gridLineIV.frame.width, height: gridLineIV.frame.height)
             ctx.cgContext.setFillColor(red: 0, green: 0, blue: 0, alpha: 0)
             ctx.cgContext.addRect(rectangle)
             

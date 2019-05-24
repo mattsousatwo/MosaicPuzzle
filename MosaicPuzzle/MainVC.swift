@@ -65,11 +65,15 @@ class MainVC: UIViewController {
         imageArray = images.collectLocalImages()
         
         animateOnScreen()
-        buttonHeight = randomButton.frame.height
-        buttonWidth = randomButton.frame.width
         // Do any additional setup after loading the view.
     }
 
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        buttonHeight = randomButton.frame.height
+        buttonWidth = randomButton.frame.width
+    }
     
     func animateHeading() {
         let viewBounds = self.view.bounds

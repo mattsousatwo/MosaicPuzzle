@@ -13,6 +13,7 @@
 		408019DDD3D8C26902009E54 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 408010C22D57C0324C2AA47A /* Main.storyboard */; };
 		40801D5F23A7C8FB21CE3A6D /* MosaicPuzzleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40801F73BA3B0A1B0C3F7A0B /* MosaicPuzzleUITests.swift */; };
 		40801E299172E896A7DDFA1B /* MosaicPuzzleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4080137D47A5DEAEE7900920 /* MosaicPuzzleTests.swift */; };
+		6125796122979FB600595B8B /* Graph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6125796022979FB600595B8B /* Graph.swift */; };
 		615691842293085B00B637C2 /* ImageEditingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615691832293085B00B637C2 /* ImageEditingVC.swift */; };
 		6156918722933A7D00B637C2 /* PuzzleVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6156918622933A7D00B637C2 /* PuzzleVC.swift */; };
 		616647782294687B003CB433 /* ImageCapture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 616647772294687B003CB433 /* ImageCapture.swift */; };
@@ -53,6 +54,7 @@
 		40801E52CFC61400E9AA0A3D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		40801F73BA3B0A1B0C3F7A0B /* MosaicPuzzleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MosaicPuzzleUITests.swift; sourceTree = "<group>"; };
 		40801FB23C2182D06E4795CA /* MosaicPuzzleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MosaicPuzzleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6125796022979FB600595B8B /* Graph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Graph.swift; sourceTree = "<group>"; };
 		615691832293085B00B637C2 /* ImageEditingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageEditingVC.swift; sourceTree = "<group>"; };
 		6156918622933A7D00B637C2 /* PuzzleVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzleVC.swift; sourceTree = "<group>"; };
 		616647772294687B003CB433 /* ImageCapture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCapture.swift; sourceTree = "<group>"; };
@@ -158,6 +160,7 @@
 				6166477922946DDF003CB433 /* TileCreation.swift */,
 				6180260E2295CA11007A681C /* Tile.swift */,
 				618026102295D742007A681C /* ErrorMessages.swift */,
+				6125796022979FB600595B8B /* Graph.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -296,6 +299,7 @@
 				61F87B2E22933D5E00327ACE /* MainVC.swift in Sources */,
 				616647782294687B003CB433 /* ImageCapture.swift in Sources */,
 				6180260F2295CA11007A681C /* Tile.swift in Sources */,
+				6125796122979FB600595B8B /* Graph.swift in Sources */,
 				61F87B312293864800327ACE /* Images.swift in Sources */,
 				618026112295D742007A681C /* ErrorMessages.swift in Sources */,
 				6166477A22946DDF003CB433 /* TileCreation.swift in Sources */,
