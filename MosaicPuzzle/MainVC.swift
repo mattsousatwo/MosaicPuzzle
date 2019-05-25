@@ -95,9 +95,9 @@ class MainVC: UIViewController {
     
     
     func animateOffScreen() {
-        
+         let duration = 0.3
         // push header off screen
-        UIView.animate(withDuration: 0.5, delay: 0.0, options: .curveEaseIn, animations: {
+        UIView.animate(withDuration: duration, delay: 0.0, options: .curveEaseIn, animations: {
             self.gameHeading.center.y -= self.view.bounds.height
            
         }, completion: { (sucess) in
@@ -105,23 +105,23 @@ class MainVC: UIViewController {
         })
         
         // send random button to the right
-        UIView.animate(withDuration: 0.5, delay: 0.0, options: .curveEaseIn, animations: {
+        UIView.animate(withDuration: duration, delay: 0.0, options: .curveEaseIn, animations: {
             self.randomButton.center.x += self.view.bounds.width
             self.randomButton.frame.size = CGSize(width: 5, height: 5)
           //  self.view.layoutIfNeeded()
         })
         // send select photo button to the right
-        UIView.animate(withDuration: 0.5, delay: 0.1, options: .curveEaseIn, animations: {
+        UIView.animate(withDuration: duration, delay: 0.1, options: .curveEaseIn, animations: {
             self.selectPhotoButton.center.x += self.view.bounds.width
             self.selectPhotoButton.frame.size = CGSize(width: 5, height: 5)
         })
         // send camera button to the right
-        UIView.animate(withDuration: 0.5, delay: 0.2, options: .curveEaseIn, animations: {
+        UIView.animate(withDuration: duration, delay: 0.2, options: .curveEaseIn, animations: {
             self.cameraButton.center.x += self.view.bounds.width
             self.cameraButton.frame.size = CGSize(width: 5, height: 5)
         })
         // send results button to the right
-        UIView.animate(withDuration: 0.5, delay: 0.3, options: .curveEaseIn, animations: {
+        UIView.animate(withDuration: duration, delay: 0.3, options: .curveEaseIn, animations: {
             self.resultsButton.center.x += self.view.bounds.width
             self.resultsButton.frame.size = CGSize(width: 5, height: 5)
         }, completion: { (sucess) in
@@ -132,27 +132,27 @@ class MainVC: UIViewController {
     
     
     func animateOnScreen() {
-        
+        let duration = 0.3
         animateHeading()
         
         // send random button to the right
-        UIView.animate(withDuration: 0.5, delay: 0.0, options: .curveEaseIn, animations: {
+        UIView.animate(withDuration: duration, delay: 0.0, options: .curveEaseIn, animations: {
             self.randomButton.center.x -= self.view.bounds.width
           //  self.randomButton.frame.size = CGSize(width: 5, height: 5)
             //  self.view.layoutIfNeeded()
         })
         // send select photo button to the right
-        UIView.animate(withDuration: 0.5, delay: 0.1, options: .curveEaseIn, animations: {
+        UIView.animate(withDuration: duration, delay: 0.1, options: .curveEaseIn, animations: {
             self.selectPhotoButton.center.x -= self.view.bounds.width
        //     self.selectPhotoButton.frame.size = CGSize(width: 5, height: 5)
         })
         // send camera button to the right
-        UIView.animate(withDuration: 0.5, delay: 0.2, options: .curveEaseIn, animations: {
+        UIView.animate(withDuration: duration, delay: 0.2, options: .curveEaseIn, animations: {
             self.cameraButton.center.x -= self.view.bounds.width
         //    self.cameraButton.frame.size = CGSize(width: 5, height: 5)
         })
         // send results button to the right
-        UIView.animate(withDuration: 0.5, delay: 0.3, options: .curveEaseIn, animations: {
+        UIView.animate(withDuration: duration, delay: 0.3, options: .curveEaseIn, animations: {
             self.resultsButton.center.x -= self.view.bounds.width
          //   self.resultsButton.frame.size = CGSize(width: 5, height: 5)
         })

@@ -219,7 +219,18 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2st-8g-sMC">
                                 <rect key="frame" x="10" y="290" width="394" height="426"/>
-                                <color key="backgroundColor" red="0.15946429967880249" green="0.19503706693649292" blue="0.25320291519165039" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="jDq-RF-fi8">
+                                        <rect key="frame" x="0.0" y="0.0" width="394" height="426"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.61960784310000006" green="0.72549019609999998" blue="0.87843137250000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="jDq-RF-fi8" firstAttribute="width" secondItem="2st-8g-sMC" secondAttribute="width" id="7RE-eU-CMS"/>
+                                    <constraint firstItem="jDq-RF-fi8" firstAttribute="height" secondItem="2st-8g-sMC" secondAttribute="height" id="P4J-2E-RDO"/>
+                                    <constraint firstItem="jDq-RF-fi8" firstAttribute="centerX" secondItem="2st-8g-sMC" secondAttribute="centerX" id="TfT-ej-SbZ"/>
+                                    <constraint firstItem="jDq-RF-fi8" firstAttribute="centerY" secondItem="2st-8g-sMC" secondAttribute="centerY" id="VI4-cv-BpK"/>
+                                </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N7P-9n-Voh">
                                 <rect key="frame" x="20" y="120" width="374" height="130"/>
@@ -265,6 +276,8 @@
                         <viewLayoutGuide key="safeArea" id="46k-GM-hB3"/>
                     </view>
                     <connections>
+                        <outlet property="gameGrid" destination="2st-8g-sMC" id="gOm-oC-IzM"/>
+                        <outlet property="puzzleGridIV" destination="jDq-RF-fi8" id="G57-Ly-AtJ"/>
                         <outlet property="tileStack" destination="VBf-ke-lbT" id="YeF-9U-TtB"/>
                     </connections>
                 </viewController>

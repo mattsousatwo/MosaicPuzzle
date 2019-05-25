@@ -10,12 +10,11 @@ import UIKit
 
 struct Graph {
     
-    func draw(_ numberOfLines: Double, linesIn imageView: UIImageView, gameImage: UIImage) {
+    func draw(_ numberOfLines: Float, linesIn imageView: UIImageView, gameImage: UIImage) {
             let start: Int = 1
-            let end = round(numberOfLines)
+            let end = round(numberOfLines) 
             
             let imgViewBounds = imageView.bounds
-            
             
             let rendererOne = UIGraphicsImageRenderer(bounds: imageView.bounds)
             let img1 = rendererOne.image(actions: { ctx in
@@ -47,7 +46,12 @@ struct Graph {
                     ctx.cgContext.addLine(to: CGPoint(x: imgViewBounds.width, y: (imgViewBounds.height / CGFloat(end)) * CGFloat(number)) )
                 }
                 
-                drawRect(in: imageView, using: gameImage, withBounds: imageView)
+                // Draw outside line for top
+                ctx.cgContext.move(to: CGPoint(x: 0, y: 0))
+                ctx.cgContext.addLine(to: CGPoint(x: 0, y: imageView.bounds.maxY))
+                // Draw outside line for left side
+                ctx.cgContext.move(to: CGPoint(x: 0, y: 0))
+                ctx.cgContext.addLine(to: CGPoint(x: imageView.bounds.maxX, y: 0))
                 
                 ctx.cgContext.drawPath(using: .fillStroke)
                 //ctx.cgContext.strokePath()
@@ -56,7 +60,7 @@ struct Graph {
         }
 
     
-    func drawRect(in bounds: UIImageView, using gameImage: UIImage, withBounds parent: UIView) {
+    func drawRect(in bounds: UIImageView, using gameImage: UIImage) {
         
         let rendererOne = UIGraphicsImageRenderer(bounds: bounds.bounds)
         let img1 = rendererOne.image(actions: { ctx in
@@ -70,7 +74,7 @@ struct Graph {
         
         
         // create grid outline
-        let rectangle = CGRect(x: 0, y: 0, width: parent.frame.width, height: parent.frame.height)
+        let rectangle = CGRect(x: 0, y: 0, width: bounds.frame.width, height: bounds.frame.height)
         ctx.cgContext.setFillColor(red: 0, green: 0, blue: 0, alpha: 0)
         ctx.cgContext.addRect(rectangle)
         
@@ -83,4 +87,38 @@ struct Graph {
 
     
     
+}
+
+// Extention to create property to check if Image is mostly Black or mostly White
+extension CGImage {
+    var isDark: Bool {
+        get {
+            guard let imageData = self.dataProvider?.data else { return false }
+            guard let ptr = CFDataGetBytePtr(imageData) else { return false }
+            let length = CFDataGetLength(imageData)
+            let threshold = Int(Double(self.width * self.height) * 0.45)
+            var darkPixels = 0
+            for i in stride(from: 0, to: length, by: 4) {
+                let r = ptr[i]
+                let g = ptr[i + 1]
+                let b = ptr[i + 2]
+                let luminance = (0.299 * Double(r) + 0.587 * Double(g) + 0.114 * Double(b))
+                if luminance < 150 {
+                    darkPixels += 1
+                    if darkPixels > threshold {
+                        return true
+                    }
+                }
+            }
+            return false
+        }
+    }
+}
+
+extension UIImage {
+    var isDark: Bool { 
+        get {
+            return self.cgImage?.isDark ?? false
+        }
+    }
 }

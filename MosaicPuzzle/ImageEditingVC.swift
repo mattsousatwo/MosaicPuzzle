@@ -18,6 +18,7 @@ class ImageEditingVC: UIViewController, UIGestureRecognizerDelegate {
     var gameImage = UIImage()
     var screenshot = UIImage()
     var tileArray = [UIImage]()
+    var numberOfLines: Float = 2
     
     @IBOutlet weak var imageViewBG: UIView!
     @IBOutlet weak var imageView: UIImageView!
@@ -48,10 +49,10 @@ class ImageEditingVC: UIViewController, UIGestureRecognizerDelegate {
         sliderValueDisplay.text = String(format: "%g", numberOfCells)
     }
     
-    
-    
+    // update view order so that the game image is first
     func configureViewOrder() {
         imageView.image = gameImage
+        // -  not sure if i need this line -
         imageViewBG.sendSubviewToBack(imageView)
         
     }
@@ -59,14 +60,8 @@ class ImageEditingVC: UIViewController, UIGestureRecognizerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         sliderView.addTarget(self, action: #selector(sliderValueChanged(_:)), for: .valueChanged)
-        
-        
         configureViewOrder()
-        
-        
-        
         squareSliderValue()
-        
         addGestures() 
         // Do any additional setup after loading the view.
     }
@@ -74,71 +69,20 @@ class ImageEditingVC: UIViewController, UIGestureRecognizerDelegate {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        drawLines()
+        graph.draw(numberOfLines, linesIn: gridLineIV, gameImage: gameImage)
     }
     
-    var numberOfLines: Float = 2
-    
-    
+    // Action for slider - change number of lines in grid / update value display
     @objc func sliderValueChanged(_ sender: UISlider) {
         print(sliderView.value)
         
         numberOfLines = sliderView.value
         
         squareSliderValue()
-        
-        drawLines()
+        graph.draw(numberOfLines, linesIn: gridLineIV, gameImage: gameImage)
     }
     
     
-    
-    func drawLines() {
-        let start: Int = 1
-        let end = round(numberOfLines)
-        
-        let imgViewBounds = gridLineIV.bounds
-    
-        
-        let rendererOne = UIGraphicsImageRenderer(bounds: gridLineIV.bounds)
-        let img1 = rendererOne.image(actions: { ctx in
-            
-            if gameImage.isDark == true {
-            ctx.cgContext.setStrokeColor(UIColor.white.cgColor)
-            } else {
-                ctx.cgContext.setStrokeColor(UIColor.black.cgColor)
-            }
-            ctx.cgContext.setLineWidth(1)
-
-            // Draw X lines (up, down)
-            for number in start...Int(end) {
-                let xValue = imgViewBounds.width / CGFloat(end)
-            
-                // begining xValue * CGFloat(number)
-            ctx.cgContext.move(to: CGPoint(x: xValue * CGFloat(number) , y: 0))
-                // end point
-            ctx.cgContext.addLine(to: CGPoint(x: (imgViewBounds.width / CGFloat(end)) * CGFloat(number) , y: imgViewBounds.height))
-            }
-    
-            // Draw Y lines (left, right)
-            for number in start...Int(end) {
-                let yValue = imgViewBounds.height / CGFloat(end)
-                
-                // begining
-                ctx.cgContext.move(to: CGPoint(x: 0, y: yValue * CGFloat(number))  )
-                // end point    - (imgViewBounds.height / CGFloat(end)) * CGFloat(number))
-                ctx.cgContext.addLine(to: CGPoint(x: imgViewBounds.width, y: (imgViewBounds.height / CGFloat(end)) * CGFloat(number)) )
-            }
-            
-            // create grid outline
-            let rectangle = CGRect(x: 0, y: 0, width: gridLineIV.frame.width, height: gridLineIV.frame.height)
-            ctx.cgContext.setFillColor(red: 0, green: 0, blue: 0, alpha: 0)
-            ctx.cgContext.addRect(rectangle)
-            
-            ctx.cgContext.drawPath(using: .fillStroke)
-            //ctx.cgContext.strokePath()
-        })
-        gridLineIV.image = img1
-    }
 
     
     // :: Gestures ::
@@ -236,6 +180,10 @@ class ImageEditingVC: UIViewController, UIGestureRecognizerDelegate {
         case "EditingToPuzzleSegue":
             let puzzleVC = segue.destination as! PuzzleVC
             puzzleVC.puzzleTiles = tileArray
+            puzzleVC.linesCount = numberOfLines
+            puzzleVC.gameImage = gameImage
+            
+            
         case "goToMainVC":
             
             print("Working!")
@@ -252,36 +200,3 @@ class ImageEditingVC: UIViewController, UIGestureRecognizerDelegate {
 } // <---  End Of Class
 
 
-// Extention to create property to check if Image is mostly Black or mostly White
-extension CGImage {
-    var isDark: Bool {
-        get {
-            guard let imageData = self.dataProvider?.data else { return false }
-            guard let ptr = CFDataGetBytePtr(imageData) else { return false }
-            let length = CFDataGetLength(imageData)
-            let threshold = Int(Double(self.width * self.height) * 0.45)
-            var darkPixels = 0
-            for i in stride(from: 0, to: length, by: 4) {
-                let r = ptr[i]
-                let g = ptr[i + 1]
-                let b = ptr[i + 2]
-                let luminance = (0.299 * Double(r) + 0.587 * Double(g) + 0.114 * Double(b))
-                if luminance < 150 {
-                    darkPixels += 1
-                    if darkPixels > threshold {
-                        return true
-                    }
-                }
-            }
-            return false
-        }
-    }
-}
-
-extension UIImage {
-    var isDark: Bool {
-        get {
-            return self.cgImage?.isDark ?? false
-        }
-    }
-}

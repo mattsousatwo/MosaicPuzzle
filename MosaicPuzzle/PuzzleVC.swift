@@ -11,11 +11,25 @@ import UIKit
 class PuzzleVC: UIViewController {
     
     let t = TileCreation()
+    let graph = Graph()
     var puzzleTiles = [UIImage]()
-    
+    var linesCount = Float()
+    var gameImage = UIImage() 
     @IBOutlet weak var tileStack: UIStackView!
+    @IBOutlet weak var puzzleGridIV: UIImageView!
+    @IBOutlet weak var gameGrid: UIView!
     
-  
+    // present views on screen - not working
+    func animateGameScreen() {
+        tileStack.alpha = 0
+        gameGrid.alpha = 0
+        
+        UIView.animate(withDuration: 0.5, delay: 0.0, options: .curveEaseInOut, animations: {
+            self.tileStack.alpha = 1
+            self.gameGrid.alpha = 1
+        })
+    }
+    
     
     func addTilesToStack() {
         
@@ -27,17 +41,24 @@ class PuzzleVC: UIViewController {
         }
         print("the number of tiles in array are : \(array?.count ?? 999)")
     }
-    
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        puzzleGridIV.isUserInteractionEnabled = false
         tileStack.isUserInteractionEnabled = true
         addTilesToStack()
+        
     }
     
-
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        graph.draw(linesCount, linesIn: puzzleGridIV, gameImage: gameImage)
+       
+    }
+    
+   
     /*
     // MARK: - Navigation
 
