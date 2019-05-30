@@ -58,6 +58,15 @@ class PuzzleVC: UIViewController {
        
     }
     
+    
+    // add movement
+    func addMovements(to view: UIView) {
+        
+    }
+    
+    
+    
+    
    
     /*
     // MARK: - Navigation

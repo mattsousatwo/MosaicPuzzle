@@ -79,7 +79,10 @@ class ImageEditingVC: UIViewController, UIGestureRecognizerDelegate {
         numberOfLines = sliderView.value
         
         squareSliderValue()
+        
         graph.draw(numberOfLines, linesIn: gridLineIV, gameImage: gameImage)
+        
+        
     }
     
     
@@ -149,7 +152,12 @@ class ImageEditingVC: UIViewController, UIGestureRecognizerDelegate {
     @objc func goBackPressed(_ sender: UITapGestureRecognizer) {
         print("go back")
         
-        performSegue(withIdentifier: "goToMainVC", sender: self)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let view = storyboard.instantiateViewController(withIdentifier: "MainVC") as! MainVC
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        //  show window
+        appDelegate.window?.rootViewController = view
+ //       performSegue(withIdentifier: "goToMainVC", sender: self)
         
     }
     
@@ -173,7 +181,7 @@ class ImageEditingVC: UIViewController, UIGestureRecognizerDelegate {
         
         return true
     }
-    
+
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier {

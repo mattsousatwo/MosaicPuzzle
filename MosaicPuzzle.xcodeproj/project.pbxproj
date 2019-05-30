@@ -20,6 +20,8 @@
 		6166477A22946DDF003CB433 /* TileCreation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6166477922946DDF003CB433 /* TileCreation.swift */; };
 		6180260F2295CA11007A681C /* Tile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6180260E2295CA11007A681C /* Tile.swift */; };
 		618026112295D742007A681C /* ErrorMessages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 618026102295D742007A681C /* ErrorMessages.swift */; };
+		619C0FA92298F8DB00A82FFB /* Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 619C0FA82298F8DB00A82FFB /* Animations.swift */; };
+		619C0FAC22990EAF00A82FFB /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 619C0FAB22990EAF00A82FFB /* AVFoundation.framework */; };
 		61F87B2E22933D5E00327ACE /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F87B2D22933D5E00327ACE /* MainVC.swift */; };
 		61F87B312293864800327ACE /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F87B302293864800327ACE /* Images.swift */; };
 /* End PBXBuildFile section */
@@ -61,6 +63,8 @@
 		6166477922946DDF003CB433 /* TileCreation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileCreation.swift; sourceTree = "<group>"; };
 		6180260E2295CA11007A681C /* Tile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tile.swift; sourceTree = "<group>"; };
 		618026102295D742007A681C /* ErrorMessages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorMessages.swift; sourceTree = "<group>"; };
+		619C0FA82298F8DB00A82FFB /* Animations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animations.swift; sourceTree = "<group>"; };
+		619C0FAB22990EAF00A82FFB /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		61F87B2D22933D5E00327ACE /* MainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
 		61F87B302293864800327ACE /* Images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -70,6 +74,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				619C0FAC22990EAF00A82FFB /* AVFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -97,6 +102,7 @@
 				40801DAD79F44A261F03C60C /* MosaicPuzzle */,
 				40801880FE0DF0B54559B16F /* MosaicPuzzleTests */,
 				4080157C3A1771DC22BA93FA /* MosaicPuzzleUITests */,
+				619C0FAA22990EAF00A82FFB /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -152,6 +158,14 @@
 			name = Controllers;
 			sourceTree = "<group>";
 		};
+		619C0FAA22990EAF00A82FFB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				619C0FAB22990EAF00A82FFB /* AVFoundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		61F87B2F2293862900327ACE /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -161,6 +175,7 @@
 				6180260E2295CA11007A681C /* Tile.swift */,
 				618026102295D742007A681C /* ErrorMessages.swift */,
 				6125796022979FB600595B8B /* Graph.swift */,
+				619C0FA82298F8DB00A82FFB /* Animations.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -304,6 +319,7 @@
 				618026112295D742007A681C /* ErrorMessages.swift in Sources */,
 				6166477A22946DDF003CB433 /* TileCreation.swift in Sources */,
 				40801888CF6BEBCF5E32320F /* AppDelegate.swift in Sources */,
+				619C0FA92298F8DB00A82FFB /* Animations.swift in Sources */,
 				615691842293085B00B637C2 /* ImageEditingVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

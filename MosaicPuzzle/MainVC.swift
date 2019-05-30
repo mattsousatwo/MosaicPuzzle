@@ -8,14 +8,16 @@
 
 import UIKit
 
-class MainVC: UIViewController {
+class MainVC: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+    
+    let animate = Animations()
 
     var images = Images()
     var imageArray = [UIImage]()
     
     var gameImage = UIImage()
-    var buttonHeight = CGFloat()
-    var buttonWidth = CGFloat()
+    var buttonSize = CGSize()
+    var buttonContainer = [UIButton?]()
     
     @IBOutlet weak var gameHeading: UILabel!
     @IBOutlet weak var randomButton: UIButton!
@@ -23,32 +25,40 @@ class MainVC: UIViewController {
     @IBOutlet weak var cameraButton: UIButton!
     @IBOutlet weak var resultsButton: UIButton!
     
-    
-    
-    
+    func goToNextScreen() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+            self.performSegue(withIdentifier: "EditImageSegue", sender: self)
+        }
+        // animate views off screen
+        animate.buttons(buttonContainer, atSize: buttonSize, andHeading: gameHeading, offScreen: self.view)
+    }
     
     @IBAction func randomPickPressed(_ sender: Any) {
         print("randomPick()")
-       
-        
         let randomImage = try? images.pullRandomImage(from: imageArray, in: self)
-        
         gameImage = try! images.unwrap(image: randomImage, in: self)!
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+        // preform segue after a delay - to send over game image and to pause for animations
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
             self.performSegue(withIdentifier: "EditImageSegue", sender: self)
         }
-        animateOffScreen()
-        
+        // animate views off screen
+        animate.buttons(buttonContainer, atSize: buttonSize, andHeading: gameHeading, offScreen: self.view)
     }
     
     @IBAction func selectPhotoPressed(_ sender: Any) {
         print("selectPhoto()")
-        performSegue(withIdentifier: "EditImageSegue", sender: self)
+       DispatchQueue.global(qos: .userInteractive).async {
+           self.images.displayMediaLibrary(source: .photoLibrary, inView: self)
+       }
+   //     performSegue(withIdentifier: "EditImageSegue", sender: self)
     }
     
     @IBAction func takePhotoPressed(_ sender: Any) {
         print("takePhoto()")
-        performSegue(withIdentifier: "EditImageSegue", sender: self)
+        
+        images.displayMediaLibrary(source: .camera, inView: self)
+        
+//        performSegue(withIdentifier: "EditImageSegue", sender: self)
     }
     
     
@@ -61,140 +71,21 @@ class MainVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         print("viewDidLoad")
-        
+        // collect buttons in array for animations
+        buttonContainer = [randomButton, selectPhotoButton, cameraButton, resultsButton]
+        // collect local images for random image selection
         imageArray = images.collectLocalImages()
         
-        animateOnScreen()
-        // Do any additional setup after loading the view.
+        // Animate views on screen
+        animate.buttons(buttonContainer, andHeading: gameHeading, onScreen: self.view)
     }
 
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        buttonHeight = randomButton.frame.height
-        buttonWidth = randomButton.frame.width
+        // set button size
+        buttonSize = randomButton.frame.size
     }
-    
-    func animateHeading() {
-        let viewBounds = self.view.bounds
-        // drop into position
-        UIView.animate(withDuration: 0.6, delay: 0, options: .curveEaseInOut, animations: {
-            // self.gameHeading.frame.origin = CGPoint(x: -viewBounds.width, y: 0)
-            self.gameHeading.frame.origin = CGPoint(x: 0, y: viewBounds.height)
-        }, completion: { (sucess) in
-            // begin spring
-            UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.4, initialSpringVelocity: 5, options: .curveEaseInOut, animations: {
-                self.gameHeading.frame = CGRect(x: self.gameHeading.frame.origin.x, y: self.gameHeading.frame.origin.y, width: self.gameHeading.bounds.width + 5, height: self.gameHeading.bounds.height + 5)
-            }, completion: { (sucess) in
-                // ending spring animation
-                self.gameHeading.frame = CGRect(x: self.gameHeading.frame.origin.x, y: self.gameHeading.frame.origin.y, width: self.gameHeading.bounds.width - 5, height: self.gameHeading.bounds.height - 5)
-            })
-        })
-        
-    }
-    
-    
-    func animateOffScreen() {
-         let duration = 0.3
-        // push header off screen
-        UIView.animate(withDuration: duration, delay: 0.0, options: .curveEaseIn, animations: {
-            self.gameHeading.center.y -= self.view.bounds.height
-           
-        }, completion: { (sucess) in
-                 self.gameHeading.alpha = 0
-        })
-        
-        // send random button to the right
-        UIView.animate(withDuration: duration, delay: 0.0, options: .curveEaseIn, animations: {
-            self.randomButton.center.x += self.view.bounds.width
-            self.randomButton.frame.size = CGSize(width: 5, height: 5)
-          //  self.view.layoutIfNeeded()
-        })
-        // send select photo button to the right
-        UIView.animate(withDuration: duration, delay: 0.1, options: .curveEaseIn, animations: {
-            self.selectPhotoButton.center.x += self.view.bounds.width
-            self.selectPhotoButton.frame.size = CGSize(width: 5, height: 5)
-        })
-        // send camera button to the right
-        UIView.animate(withDuration: duration, delay: 0.2, options: .curveEaseIn, animations: {
-            self.cameraButton.center.x += self.view.bounds.width
-            self.cameraButton.frame.size = CGSize(width: 5, height: 5)
-        })
-        // send results button to the right
-        UIView.animate(withDuration: duration, delay: 0.3, options: .curveEaseIn, animations: {
-            self.resultsButton.center.x += self.view.bounds.width
-            self.resultsButton.frame.size = CGSize(width: 5, height: 5)
-        }, completion: { (sucess) in
-            self.animateViewsBack()
-        })
-        
-    }
-    
-    
-    func animateOnScreen() {
-        let duration = 0.3
-        animateHeading()
-        
-        // send random button to the right
-        UIView.animate(withDuration: duration, delay: 0.0, options: .curveEaseIn, animations: {
-            self.randomButton.center.x -= self.view.bounds.width
-          //  self.randomButton.frame.size = CGSize(width: 5, height: 5)
-            //  self.view.layoutIfNeeded()
-        })
-        // send select photo button to the right
-        UIView.animate(withDuration: duration, delay: 0.1, options: .curveEaseIn, animations: {
-            self.selectPhotoButton.center.x -= self.view.bounds.width
-       //     self.selectPhotoButton.frame.size = CGSize(width: 5, height: 5)
-        })
-        // send camera button to the right
-        UIView.animate(withDuration: duration, delay: 0.2, options: .curveEaseIn, animations: {
-            self.cameraButton.center.x -= self.view.bounds.width
-        //    self.cameraButton.frame.size = CGSize(width: 5, height: 5)
-        })
-        // send results button to the right
-        UIView.animate(withDuration: duration, delay: 0.3, options: .curveEaseIn, animations: {
-            self.resultsButton.center.x -= self.view.bounds.width
-         //   self.resultsButton.frame.size = CGSize(width: 5, height: 5)
-        })
-    }
-
-    func animateViewsBack() {
-        let delay = 0.8
-        let duration = 0.1
-        
-        // push header off screen
-        UIView.animate(withDuration: duration, delay: delay, options: .curveEaseIn, animations: {
-            self.gameHeading.center.y += self.view.bounds.height
-            
-        }, completion: { (sucess) in
-            self.gameHeading.alpha = 1
-        })
-        
-        // send random button to the right
-        UIView.animate(withDuration: duration, delay: delay, options: .curveEaseIn, animations: {
-            self.randomButton.center.x -= self.view.bounds.width
-            self.randomButton.frame.size = CGSize(width: self.buttonWidth, height: self.buttonHeight)
-            //  self.view.layoutIfNeeded()
-        })
-        // send select photo button to the right
-        UIView.animate(withDuration: duration, delay: delay, options: .curveEaseIn, animations: {
-            self.selectPhotoButton.center.x -= self.view.bounds.width
-            self.selectPhotoButton.frame.size = CGSize(width: self.buttonWidth, height: self.buttonHeight)
-        })
-        // send camera button to the right
-        UIView.animate(withDuration: duration, delay: delay, options: .curveEaseIn, animations: {
-            self.cameraButton.center.x -= self.view.bounds.width
-            self.cameraButton.frame.size = CGSize(width: self.buttonWidth, height: self.buttonHeight)
-        })
-        // send results button to the right
-        UIView.animate(withDuration: duration, delay: delay, options: .curveEaseIn, animations: {
-            self.resultsButton.center.x -= self.view.bounds.width
-            self.resultsButton.frame.size = CGSize(width: self.buttonWidth, height: self.buttonHeight)
-        })
-    }
-    
-    
-    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let nextVC = segue.destination as! ImageEditingVC
@@ -204,16 +95,52 @@ class MainVC: UIViewController {
     }
     
     @IBAction func unwindToMainVC(segue: UIStoryboardSegue) { }
-    
-    /*
-    // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    // The user did pick a photo
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        print("selected")
+        
+        picker.dismiss(animated: true, completion: { () in
+    //        DispatchQueue.main.async {
+                                // will bring over nextVC however back button is disabled 
+    //           self.performSegue(withIdentifier: "EditImageSegue", sender: self)
+            
+ //           }
+        })
+        
+        let newImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
+        
+        guard let image = try? images.unwrap(image: newImage, in: self) else { return }
+        
+        gameImage = image
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+                    // will bring view over however slider can become delayed
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let view = storyboard.instantiateViewController(withIdentifier: "ImageEditingVC") as! ImageEditingVC
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+          //  show window
+            appDelegate.window?.rootViewController = view
+        })
+        
+        
+     //   self.performSegue(withIdentifier: "EditImageSegue", sender: self)
+        
+//        let topVC = topMostController()
+//        let vcToPresent = self.storyboard!.instantiateViewController(withIdentifier: "ImageEditingVC") as! ImageEditingVC
+//        topVC.present(vcToPresent, animated: true, completion: nil)
+//
     }
-    */
+    
+    
+    func topMostController() -> UIViewController {
+        var topController: UIViewController = UIApplication.shared.keyWindow!.rootViewController!
+        while (topController.presentedViewController != nil) {
+            topController = topController.presentedViewController!
+        }
+        return topController
+    }
+    
 
 }
 
